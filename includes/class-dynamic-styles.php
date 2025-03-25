@@ -57,56 +57,118 @@ class WPFocusBlocks_Dynamic_Styles {
     /**
      * Инициализация хуков
      */
-    private function init_hooks() {
-        // Действия для фронтенда
-        add_action('wp', array($this, 'analyze_content'));
-        add_action('wp_head', array($this, 'output_dynamic_styles'), 100);
-        
-        // Очистка кэша при сохранении записей
-        add_action('save_post', array($this, 'clear_post_cache'), 10, 2);
-        
-        // Очистка кэша при сохранении настроек
-        add_action('update_option_wpfocusblocks_settings', array($this, 'clear_all_caches'));
-    }
+	private function init_hooks() {
+		// Действия для фронтенда - используем wp_head с высоким приоритетом
+		// Не используем wp для анализа контента, т.к. это происходит слишком рано
+		add_action('wp_head', array($this, 'analyze_and_output_styles'), 99);
+		
+		// Очистка кэша при сохранении записей
+		add_action('save_post', array($this, 'clear_post_cache'), 10, 2);
+		
+		// Очистка кэша при сохранении настроек
+		add_action('update_option_wpfocusblocks_settings', array($this, 'clear_all_caches'));
+	}
 
-    /**
-     * Анализирует контент для определения используемых блоков
-     */
-    public function analyze_content() {
-        // Пропускаем, если не просматривается отдельная запись
-        if (!is_singular()) {
-            return;
-        }
+	/**
+	 * Анализирует контент и выводит стили за один проход
+	 */
+	public function analyze_and_output_styles() {
+		// Только для фронтенда
+		if (is_admin()) {
+			return;
+		}
+		
+		// Получаем текущую запись
+		global $post;
+		
+		// Если нет записи, выводим все стили на всякий случай
+		if (!$post instanceof WP_Post) {
+			echo '<style id="wpfocusblocks-dynamic-styles">' . $this->generate_all_styles() . '</style>';
+			return;
+		}
+		
+		// Проверяем кэш
+		$cache_enabled = isset($this->settings['cache_enabled']) ? (bool) $this->settings['cache_enabled'] : true;
+		
+		if ($cache_enabled) {
+			$cache_key = 'wpfb_styles_' . $post->ID . '_' . md5($post->post_modified);
+			$cached_styles = get_transient($cache_key);
+			
+			if (false !== $cached_styles) {
+				echo '<style id="wpfocusblocks-dynamic-styles">' . $cached_styles . '</style>';
+				return;
+			}
+		}
+		
+		// Получаем содержимое записи
+		$content = $post->post_content;
+		
+		// Получаем список всех блоков
+		$core = WPFocusBlocks_Core::get_instance();
+		$all_blocks = $core->get_available_blocks();
+		
+		// Проверяем наличие шорткодов
+		$used_blocks = array();
+		foreach ($all_blocks as $block_id => $block_data) {
+			if (!$core->is_block_enabled($block_id)) {
+				continue;
+			}
+			
+			// Проверяем наличие шорткода в контенте
+			if (has_shortcode($content, $block_id) || 
+				strpos($content, '[' . $block_id) !== false) {
+				$used_blocks[] = $block_id;
+			}
+		}
+		
+		// Если не нашли шорткоды, но они могут быть в виджетах или elsewhere
+		if (empty($used_blocks)) {
+			// Выводим общие стили для минимального размера файла
+			echo '<style id="wpfocusblocks-dynamic-styles">' . $this->get_common_styles() . '</style>';
+			return;
+		}
+		
+		// Сохраняем список используемых блоков
+		$this->used_blocks = $used_blocks;
+		
+		// Генерируем стили
+		$styles = $this->generate_styles();
+		
+		// Кэшируем результат
+		if ($cache_enabled) {
+			$cache_time = isset($this->settings['cache_time']) ? intval($this->settings['cache_time']) : 3600;
+			set_transient($cache_key, $styles, $cache_time);
+		}
+		
+		// Выводим стили
+		echo '<style id="wpfocusblocks-dynamic-styles">' . $styles . '</style>';
+	}
 
-        global $post;
-        
-        // Проверяем наличие записи
-        if (!$post instanceof WP_Post) {
-            return;
-        }
-
-        // Проверяем кэш
-        $cache_enabled = isset($this->settings['cache_enabled']) ? (bool) $this->settings['cache_enabled'] : true;
-        
-        if ($cache_enabled) {
-            $cache_key = 'wpfb_blocks_' . $post->ID . '_' . md5($post->post_modified);
-            $cached_blocks = get_transient($cache_key);
-            
-            if (false !== $cached_blocks) {
-                $this->used_blocks = $cached_blocks;
-                return;
-            }
-        }
-
-        // Анализируем контент
-        $this->scan_content_for_blocks($post->post_content);
-
-        // Кэшируем результат
-        if ($cache_enabled) {
-            $cache_time = isset($this->settings['cache_time']) ? intval($this->settings['cache_time']) : 3600;
-            set_transient($cache_key, $this->used_blocks, $cache_time);
-        }
-    }
+	/**
+	 * Генерирует стили для всех блоков
+	 *
+	 * @return string CSS-стили для всех блоков
+	 */
+	private function generate_all_styles() {
+		// Общие стили
+		$styles = $this->get_common_styles();
+		
+		// Получаем список всех блоков
+		$core = WPFocusBlocks_Core::get_instance();
+		$all_blocks = $core->get_available_blocks();
+		
+		// Добавляем стили для каждого блока
+		foreach ($all_blocks as $block_id => $block_data) {
+			if ($core->is_block_enabled($block_id)) {
+				$styles .= $this->get_block_styles($block_id);
+			}
+		}
+		
+		// Добавляем адаптивные стили
+		$styles .= $this->get_responsive_styles();
+		
+		return $styles;
+	}
 
     /**
      * Сканирует контент на наличие блоков и шорткодов
@@ -178,28 +240,76 @@ class WPFocusBlocks_Dynamic_Styles {
         // Выводим стили
         echo '<style id="wpfocusblocks-dynamic-styles">' . $styles . '</style>';
     }
+	
+	 /**
+	 * Генерирует стили для редактора TinyMCE
+	 *
+	 * @return string CSS-стили для редактора
+	 */
+	public function generate_styles_for_editor() {
+		$styles = '';
+		
+		// Добавляем общие стили для редактора
+		$styles .= $this->get_common_styles();
+		
+		// Добавляем стили для каждого блока
+		$core = WPFocusBlocks_Core::get_instance();
+		$all_blocks = $core->get_available_blocks();
+		
+		foreach ($all_blocks as $block_id => $block_data) {
+			if ($core->is_block_enabled($block_id)) {
+				$styles .= $this->get_block_styles($block_id);
+			}
+		}
+		
+		// Добавляем специальные стили для редактора
+		$styles .= '
+		/* Стили для редактора */
+		.wpfocusblocks-editor .wpfocusblocks-preview {
+			cursor: pointer;
+			position: relative;
+		}
+		
+		.wpfocusblocks-editor .wpfocusblocks-preview::after {
+			content: "";
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			z-index: 1;
+			pointer-events: none;
+			border: 1px dashed #ccc;
+		}
+		
+		.wpfocusblocks-editor .wpfocusblocks-preview:hover::after {
+			border-color: #0073aa;
+		}';
+		
+		return $styles;
+	}
 
-    /**
-     * Генерирует стили для используемых блоков
-     *
-     * @return string CSS-стили
-     */
-    private function generate_styles() {
-        $styles = '';
-        
-        // Добавляем общие стили для всех блоков
-        $styles .= $this->get_common_styles();
-        
-        // Добавляем стили для каждого используемого блока
-        foreach ($this->used_blocks as $block_id) {
-            $styles .= $this->get_block_styles($block_id);
-        }
-        
-        // Добавляем адаптивные стили
-        $styles .= $this->get_responsive_styles();
-        
-        return $styles;
-    }
+	/**
+	 * Генерирует стили для используемых блоков
+	 *
+	 * @return string CSS-стили
+	 */
+	private function generate_styles() {
+		$styles = '';
+		
+		// Добавляем общие стили для всех блоков
+		$styles .= $this->get_common_styles();
+		
+		// Добавляем стили для каждого используемого блока
+		foreach ($this->used_blocks as $block_id) {
+			$styles .= $this->get_block_styles($block_id);
+		}
+		
+		// Добавляем адаптивные стили
+		$styles .= $this->get_responsive_styles();
+		
+		return $styles;
+	}
 
     /**
      * Возвращает общие стили для всех блоков

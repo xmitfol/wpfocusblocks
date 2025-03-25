@@ -1,0 +1,102 @@
+/* Базовые стили для редактора */
+.wpfocusblocks-preview {
+    margin: 10px 0;
+    padding: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    position: relative;
+}
+
+/* Метка с названием блока */
+.wpfocusblocks-preview::before {
+    content: attr(data-mce-block);
+    position: absolute;
+    right: 5px;
+    top: 5px;
+    background: rgba(0,0,0,0.5);
+    color: white;
+    font-size: 10px;
+    padding: 2px 5px;
+    border-radius: 3px;
+    z-index: 2;
+}
+
+/* Стили для разных типов блоков */
+.ostorozhno1 {
+    background: linear-gradient(45deg, #FFE3DB, #FFEBD8) !important;
+}
+
+.okey1 {
+    background: linear-gradient(45deg, #DEF9E5, #EFFBCE) !important;
+}
+
+.vnimanie1 {
+    background: linear-gradient(45deg, #FFF4D4, #FFEADC) !important;
+}
+
+.vopros1 {
+    background: linear-gradient(45deg, #E3F1F4, #E3EDFF) !important;
+}
+
+.kstati1 {
+    background: linear-gradient(45deg, #EFE2F6, #F6E2F0) !important;
+}
+
+.palec_vverh1 {
+    background: linear-gradient(45deg, #DEF9E5, #EFFBCE) !important;
+}
+
+.palec_vniz1 {
+    background: linear-gradient(45deg, #FFE3DB, #FFEBD8) !important;
+}
+
+.quote {
+    background: linear-gradient(45deg, #E5FEFF, #DDF5F6) !important;
+}
+
+.pro {
+    background-color: rgba(128,128,128,0.05) !important;
+    border: 1px solid #B5D043 !important;
+}
+
+/* Текстовые выделения */
+span.myellow {
+    background: rgba(243,156,18,0.15) !important;
+    padding: 2px;
+}
+
+span.mred {
+    background: rgba(231,76,60,0.15) !important;
+    padding: 2px;
+}
+
+span.mgreen {
+    background: rgba(46,204,113,0.15) !important;
+    padding: 2px;
+}
+
+span.msilver {
+    background: rgba(127,140,141,0.15) !important;
+    padding: 2px;
+}
+
+/* Линии */
+span.lblue {
+    border-bottom: 1px solid #3498DB !important;
+    padding-bottom: 1px;
+}
+
+span.lred {
+    border-bottom: 1px solid #e74c3c !important;
+    padding-bottom: 1px;
+}
+
+span.lgreen {
+    border-bottom: 1px solid #2ecc71 !important;
+    padding-bottom: 1px;
+}
+
+span.lyellow {
+    border-bottom: 1px solid #f39c12 !important;
+    padding-bottom: 1px;
+}

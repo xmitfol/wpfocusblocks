@@ -3,12 +3,9 @@
     tinymce.create('tinymce.plugins.wpfocusblocks', {
         init: function(ed, url) {
             // Используем глобальную переменную для URL иконок, установленную через PHP
-            // Без запасного пути, который может быть некорректным
             var iconsUrl = typeof wpfocusblocks_icons_url !== 'undefined' ? 
                 wpfocusblocks_icons_url : 
                 url + '/../../assets/icons/';
-            
-            console.log("TinyMCE plugin initialized. Icons URL:", iconsUrl);
             
             // Красный блок
             ed.addButton('red', {

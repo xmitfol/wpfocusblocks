@@ -63,19 +63,47 @@ class WPFocusBlocks_Core {
         $this->init_components();
     }
 
-    /**
-     * Регистрация скриптов и стилей
-     */
-    public function register_assets() {
-        // Регистрируем пустой CSS файл для динамических стилей
-        wp_register_style(
-            'wpfocusblocks-dynamic', 
-            false
-        );
-        
-        // Подключаем его
-        wp_enqueue_style('wpfocusblocks-dynamic');
-    }
+	/**
+	 * Регистрация скриптов и стилей
+	 */
+	public function register_assets() {
+		// Добавляем встроенные стили прямо при загрузке страницы
+		add_action('wp_head', array($this, 'output_inline_styles'), 99);
+	}
+
+	/**
+	 * Вывод встроенных стилей
+	 */
+	public function output_inline_styles() {
+		// Создаем экземпляр класса стилей
+		$dynamic_styles = class_exists('WPFocusBlocks_Dynamic_Styles') 
+			? WPFocusBlocks_Dynamic_Styles::get_instance() 
+			: null;
+		
+		if ($dynamic_styles) {
+			// Вызываем метод для генерации стилей
+			$dynamic_styles->output_dynamic_styles();
+		} else {
+			// Запасной вариант, если класс стилей недоступен
+			$styles = '
+			/* WPFocusBlocks - Базовые стили */
+			.okey1 {
+				background: linear-gradient(45deg, #DEF9E5, #EFFBCE);
+				padding: 4% 4% 3% 4%;
+				margin: 3% 0;
+				position: relative;
+				border-radius: 10px;
+			}
+			.okey1 p {
+				margin: 0 0 1% 10%;
+				font-size: 120%;
+			}
+			/* Другие стили блоков добавьте здесь */
+			';
+			
+			echo '<style id="wpfocusblocks-inline-styles">' . $styles . '</style>';
+		}
+	}
 
     /**
      * Регистрация скриптов и стилей для админки

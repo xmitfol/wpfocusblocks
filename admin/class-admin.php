@@ -52,6 +52,42 @@ class WPFocusBlocks_Admin {
         // Добавление ссылки на настройки на странице плагинов
         add_filter('plugin_action_links_' . WPFOCUSBLOCKS_BASENAME, array($this, 'add_settings_link'));
     }
+	
+	/**
+	 * Регистрация скриптов и стилей для админки
+	 */
+	public function register_admin_assets($hook) {
+		// Подключаем стили только на странице настроек плагина или страницах редактирования
+		if ('settings_page_wpfocusblocks' === $hook || in_array($hook, array('post.php', 'post-new.php'))) {
+			wp_enqueue_style(
+				'wpfocusblocks-admin',
+				WPFOCUSBLOCKS_URL . 'admin/css/admin-styles.css',
+				array(),
+				WPFOCUSBLOCKS_VERSION
+			);
+			
+			// Стили для предпросмотра блоков в редакторе
+			if (in_array($hook, array('post.php', 'post-new.php'))) {
+				wp_enqueue_style(
+					'wpfocusblocks-editor',
+					WPFOCUSBLOCKS_URL . 'admin/css/editor-styles.css',
+					array(),
+					WPFOCUSBLOCKS_VERSION
+				);
+			}
+			
+			wp_enqueue_script(
+				'wpfocusblocks-admin',
+				WPFOCUSBLOCKS_URL . 'admin/js/admin-script.js',
+				array('jquery', 'wp-color-picker'),
+				WPFOCUSBLOCKS_VERSION,
+				true
+			);
+			
+			// Подключаем палитру цветов WordPress
+			wp_enqueue_style('wp-color-picker');
+		}
+	}
 
     /**
      * Добавление страницы в административное меню
