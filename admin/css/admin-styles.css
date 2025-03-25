@@ -1,0 +1,63 @@
+/**
+ * Стили для административного интерфейса плагина WPFocusBlocks
+ */
+
+/* Общие стили */
+.wpfocusblocks-admin-content {
+    display: flex;
+    margin-top: 20px;
+}
+
+.wpfocusblocks-admin-main {
+    flex: 1;
+    margin-right: 20px;
+}
+
+.wpfocusblocks-admin-sidebar {
+    width: 300px;
+}
+
+/* Стили для информационных блоков */
+.wpfocusblocks-widget {
+    background: #fff;
+    border: 1px solid #ccd0d4;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+    margin-bottom: 20px;
+    padding: 15px;
+}
+
+.wpfocusblocks-widget h2 {
+    margin-top: 0;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #eee;
+    font-size: 14px;
+}
+
+/* Стили для таблицы блоков */
+.form-table th {
+    width: 200px;
+}
+
+/* Стили для превью блоков в админке */
+.wpfocusblocks-block-preview {
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #eee;
+    background: #f9f9f9;
+}
+
+/* Адаптивные стили */
+@media screen and (max-width: 782px) {
+    .wpfocusblocks-admin-content {
+        flex-direction: column;
+    }
+    
+    .wpfocusblocks-admin-main {
+        margin-right: 0;
+        margin-bottom: 20px;
+    }
+    
+    .wpfocusblocks-admin-sidebar {
+        width: 100%;
+    }
+}

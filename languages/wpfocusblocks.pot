@@ -1,0 +1,267 @@
+# Copyright (C) 2023 WPFocusBlocks Team
+# This file is distributed under the GPL-2.0+.
+msgid ""
+msgstr ""
+"Project-Id-Version: WPFocusBlocks 1.0.0\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wpfocusblocks\n"
+"POT-Creation-Date: 2023-08-01 10:00:00+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2023-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"X-Generator: WP-CLI 2.7.1\n"
+"X-Domain: wpfocusblocks\n"
+
+#. Plugin Name of the plugin
+msgid "WPFocusBlocks"
+msgstr ""
+
+#. Plugin URI of the plugin
+msgid "https://wpfocusblocks.com"
+msgstr ""
+
+#. Description of the plugin
+msgid "Красивые блоки внимания и выделения текста без влияния на скорость сайта."
+msgstr ""
+
+#. Author of the plugin
+msgid "WPFocusBlocks Team"
+msgstr ""
+
+#. Author URI of the plugin
+msgid "https://wpfocusblocks.com"
+msgstr ""
+
+#: includes/class-core.php:175
+msgid "Красный блок"
+msgstr ""
+
+#: includes/class-core.php:176
+msgid "Используется для предупреждений и важной информации"
+msgstr ""
+
+#: includes/class-core.php:182
+msgid "Зелёный блок"
+msgstr ""
+
+#: includes/class-core.php:183
+msgid "Используется для успешных операций и рекомендаций"
+msgstr ""
+
+#: includes/class-core.php:189
+msgid "Оранжевый блок"
+msgstr ""
+
+#: includes/class-core.php:190
+msgid "Используется для информации требующей внимания"
+msgstr ""
+
+#: includes/class-core.php:196
+msgid "Синий блок"
+msgstr ""
+
+#: includes/class-core.php:197
+msgid "Используется для информационных сообщений"
+msgstr ""
+
+#: includes/class-core.php:203
+msgid "Сиреневый блок"
+msgstr ""
+
+#: includes/class-core.php:204
+msgid "Используется для дополнительной информации"
+msgstr ""
+
+#: includes/class-core.php:210
+msgid "Палец вверх"
+msgstr ""
+
+#: includes/class-core.php:211
+msgid "Используется для положительных моментов"
+msgstr ""
+
+#: includes/class-core.php:217
+msgid "Палец вниз"
+msgstr ""
+
+#: includes/class-core.php:218
+msgid "Используется для отрицательных моментов"
+msgstr ""
+
+#: includes/class-core.php:224
+msgid "Блок цитаты"
+msgstr ""
+
+#: includes/class-core.php:225
+msgid "Используется для выделения цитат"
+msgstr ""
+
+#: includes/class-core.php:231
+msgid "Блок PRO"
+msgstr ""
+
+#: includes/class-core.php:232
+msgid "Используется для выделения premium-контента"
+msgstr ""
+
+#: includes/class-core.php:238
+msgid "Выделение жёлтым"
+msgstr ""
+
+#: includes/class-core.php:239
+msgid "Маркерное выделение текста жёлтым"
+msgstr ""
+
+#: includes/class-core.php:245
+msgid "Выделение красным"
+msgstr ""
+
+#: includes/class-core.php:246
+msgid "Маркерное выделение текста красным"
+msgstr ""
+
+#: includes/class-core.php:252
+msgid "Выделение зелёным"
+msgstr ""
+
+#: includes/class-core.php:253
+msgid "Маркерное выделение текста зелёным"
+msgstr ""
+
+#: includes/class-core.php:259
+msgid "Выделение серым"
+msgstr ""
+
+#: includes/class-core.php:260
+msgid "Маркерное выделение текста серым"
+msgstr ""
+
+#: includes/class-core.php:266
+msgid "Подчёркивание синим"
+msgstr ""
+
+#: includes/class-core.php:267
+msgid "Подчёркивание текста синим"
+msgstr ""
+
+#: includes/class-core.php:273
+msgid "Подчёркивание красным"
+msgstr ""
+
+#: includes/class-core.php:274
+msgid "Подчёркивание текста красным"
+msgstr ""
+
+#: includes/class-core.php:280
+msgid "Подчёркивание жёлтым"
+msgstr ""
+
+#: includes/class-core.php:281
+msgid "Подчёркивание текста жёлтым"
+msgstr ""
+
+#: includes/class-core.php:287
+msgid "Подчёркивание зелёным"
+msgstr ""
+
+#: includes/class-core.php:288
+msgid "Подчёркивание текста зелёным"
+msgstr ""
+
+#: admin/class-admin.php:63
+msgid "WPFocusBlocks - Настройки"
+msgstr ""
+
+#: admin/class-admin.php:64
+msgid "WPFocusBlocks"
+msgstr ""
+
+#: admin/class-admin.php:86
+msgid "Общие настройки"
+msgstr ""
+
+#: admin/class-admin.php:94
+msgid "Кэширование стилей"
+msgstr ""
+
+#: admin/class-admin.php:102
+msgid "Время кэширования (секунды)"
+msgstr ""
+
+#: admin/class-admin.php:110
+msgid "Доступные блоки"
+msgstr ""
+
+#: admin/class-admin.php:133
+msgid "Настройки"
+msgstr ""
+
+#: admin/class-admin.php:167
+msgid "О плагине"
+msgstr ""
+
+#: admin/class-admin.php:169
+msgid "WPFocusBlocks добавляет красивые блоки внимания и выделения текста без влияния на скорость сайта."
+msgstr ""
+
+#: admin/class-admin.php:172
+msgid "Версия:"
+msgstr ""
+
+#: admin/class-admin.php:177
+msgid "Как использовать"
+msgstr ""
+
+#: admin/class-admin.php:179
+msgid "Для добавления блока в классическом редакторе:"
+msgstr ""
+
+#: admin/class-admin.php:182
+msgid "Выделите текст в редакторе"
+msgstr ""
+
+#: admin/class-admin.php:183
+msgid "Нажмите на соответствующую кнопку в панели инструментов"
+msgstr ""
+
+#: admin/class-admin.php:186
+msgid "Для добавления блока в редакторе Gutenberg:"
+msgstr ""
+
+#: admin/class-admin.php:189
+msgid "Добавьте блок \"Классический редактор\""
+msgstr ""
+
+#: admin/class-admin.php:190
+msgid "Используйте кнопки как в классическом редакторе"
+msgstr ""
+
+#: admin/class-admin.php:202
+msgid "Основные настройки плагина WPFocusBlocks."
+msgstr ""
+
+#: admin/class-admin.php:213
+msgid "Включить кэширование стилей (рекомендуется)"
+msgstr ""
+
+#: admin/class-admin.php:216
+msgid "Кэширование стилей ускоряет работу плагина и снижает нагрузку на сервер."
+msgstr ""
+
+#: admin/class-admin.php:229
+msgid "Время в секундах, на которое будут кэшироваться стили. По умолчанию: 3600 (1 час)."
+msgstr ""
+
+#: admin/class-admin.php:238
+msgid "Укажите, какие блоки должны быть доступны в редакторе."
+msgstr ""
+
+#: admin/class-admin.php:253
+msgid "Включено"
+msgstr ""
+
+#: includes/class-gutenberg.php:77
+msgid "WPFocusBlocks"
+msgstr ""
