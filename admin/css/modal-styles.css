@@ -1,0 +1,211 @@
+/**
+ * WPFocusBlocks - Стили для модального окна выбора блоков
+ */
+
+.wpfocusblocks-modal-content {
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.wpfocusblocks-block-icons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    margin-bottom: 15px;
+}
+
+.wpfocusblocks-block {
+    display: block;
+    width: 60px;
+    height: 60px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    position: relative;
+    border: 2px solid transparent;
+}
+
+.wpfocusblocks-block:hover {
+    border-color: #ddd;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+}
+
+.wpfocusblocks-block.active {
+    border: 2px solid #0073aa;
+    box-shadow: 0 0 8px rgba(0, 115, 170, 0.5);
+}
+
+/* Стили для предпросмотра разных типов блоков */
+.wpfocusblocks-block--red {
+    background: linear-gradient(45deg, #FFE3DB, #FFEBD8);
+}
+.wpfocusblocks-block--red::before {
+    content: "\f534";
+    font-family: dashicons;
+    color: #e74c3c;
+    font-size: 24px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.wpfocusblocks-block--green {
+    background: linear-gradient(45deg, #DEF9E5, #EFFBCE);
+}
+.wpfocusblocks-block--green::before {
+    content: "\f147";
+    font-family: dashicons;
+    color: #2ecc71;
+    font-size: 24px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.wpfocusblocks-block--yellow {
+    background: linear-gradient(45deg, #FFF4D4, #FFEADC);
+}
+.wpfocusblocks-block--yellow::before {
+    content: "\f348";
+    font-family: dashicons;
+    color: #f39c12;
+    font-size: 24px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.wpfocusblocks-block--blue {
+    background: linear-gradient(45deg, #E3F1F4, #E3EDFF);
+}
+.wpfocusblocks-block--blue::before {
+    content: "\f223";
+    font-family: dashicons;
+    color: #3498db;
+    font-size: 24px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.wpfocusblocks-block--purple {
+    background: linear-gradient(45deg, #EFE2F6, #F6E2F0);
+}
+.wpfocusblocks-block--purple::before {
+    content: "\f339";
+    font-family: dashicons;
+    color: #9b59b6;
+    font-size: 24px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.wpfocusblocks-block--tup {
+    background: linear-gradient(45deg, #DEF9E5, #EFFBCE);
+}
+.wpfocusblocks-block--tup::before {
+    content: "\f529";
+    font-family: dashicons;
+    color: #2ecc71;
+    font-size: 24px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.wpfocusblocks-block--tdown {
+    background: linear-gradient(45deg, #FFE3DB, #FFEBD8);
+}
+.wpfocusblocks-block--tdown::before {
+    content: "\f542";
+    font-family: dashicons;
+    color: #e74c3c;
+    font-size: 24px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.wpfocusblocks-block--quote {
+    background: linear-gradient(45deg, #E5FEFF, #DDF5F6);
+}
+.wpfocusblocks-block--quote::before {
+    content: "\f122";
+    font-family: dashicons;
+    color: #1abc9c;
+    font-size: 24px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.wpfocusblocks-block--pro {
+    border: 1px solid #B5D043;
+    background-color: rgba(128, 128, 128, 0.05);
+    background-image: linear-gradient(135deg, rgba(255, 255, 255, 1) 25%, transparent 0, transparent 50%, rgba(255, 255, 255, 1) 0, rgba(255, 255, 255, 1) 75%, transparent 0);
+    background-size: 20px 20px;
+}
+.wpfocusblocks-block--pro::before {
+    content: "\f313";
+    font-family: dashicons;
+    color: #B5D043;
+    font-size: 24px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.wpfocusblocks-block-textarea {
+    margin-top: 15px;
+}
+
+.wpfocusblocks-block-textarea textarea {
+    width: 100%;
+    height: 100px;
+    padding: 10px;
+    box-sizing: border-box;
+    font-family: inherit;
+    font-size: 14px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+}
+
+/* Стили для заголовков блоков в модальном окне */
+.wpfocusblocks-block-title {
+    position: absolute;
+    bottom: -20px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 10px;
+    color: #666;
+}
+
+/* Адаптивные стили для модального окна */
+@media screen and (max-width: 782px) {
+    .wpfocusblocks-block {
+        width: 50px;
+        height: 50px;
+        margin: 3px;
+    }
+    
+    .wpfocusblocks-block::before {
+        font-size: 20px;
+    }
+    
+    .wpfocusblocks-block-textarea textarea {
+        height: 80px;
+    }
+}
+	
