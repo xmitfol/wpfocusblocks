@@ -92,24 +92,30 @@ class WPFocusBlocks_TinyMCE {
      * @param array $plugins Массив плагинов
      * @return array Обновленный массив плагинов
      */
-    public function add_tinymce_plugin($plugins) {
-        $plugins['wpfocusblocks'] = WPFOCUSBLOCKS_URL . 'admin/js/tinymce-plugin.js';
-        return $plugins;
-    }
+
+	public function add_tinymce_plugin($plugins) {
+		// Используем константу WPFOCUSBLOCKS_URL
+		$plugins['wpfocusblocks'] = WPFOCUSBLOCKS_URL . 'admin/js/tinymce-plugin.js';
+		return $plugins;
+	}
     
     /**
      * Добавляем URL иконок в JavaScript
      */
-    public function add_icons_url_to_script() {
-        // Используем wp_add_inline_script вместо прямого вывода
-        wp_register_script('wpfocusblocks-icons-url', false);
-        wp_enqueue_script('wpfocusblocks-icons-url');
-        wp_add_inline_script(
-            'wpfocusblocks-icons-url', 
-            'var wpfocusblocks_icons_url = "' . esc_url(WPFOCUSBLOCKS_URL . 'assets/icons/') . '";
-            console.log("WPFocusBlocks Icons URL:", wpfocusblocks_icons_url);'
-        );
-    }
+	public function add_icons_url_to_script() {
+		// Используем wp_add_inline_script вместо прямого вывода
+		wp_register_script('wpfocusblocks-icons-url', false);
+		wp_enqueue_script('wpfocusblocks-icons-url');
+		
+		// Используем WPFOCUSBLOCKS_URL константу для указания правильного пути к иконкам
+		$icons_url = WPFOCUSBLOCKS_URL . 'assets/icons/';
+		
+		wp_add_inline_script(
+			'wpfocusblocks-icons-url', 
+			'var wpfocusblocks_icons_url = "' . esc_url($icons_url) . '";
+			console.log("WPFocusBlocks Icons URL:", wpfocusblocks_icons_url);'
+		);
+	}
 
     /**
      * Регистрируем кнопки в редакторе
